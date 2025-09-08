@@ -21,18 +21,18 @@ public class SecurityConfig {
 
 
         // this is what we call method chaining
-        http
+       return http
                 .csrf(customizer -> customizer.disable())
         .authorizeHttpRequests(request -> request.anyRequest().authenticated())
 //        http.formLogin(Customizer.withDefaults());
         .httpBasic(Customizer.withDefaults())
-        .sessionManagement(sessions->sessions.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        .sessionManagement(sessions->sessions.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).build();
 
 
 
 
 
-        return http.build();
+
     }
 
 }
