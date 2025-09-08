@@ -19,11 +19,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(customizer -> customizer.disable());
-        http.authorizeHttpRequests(request -> request.anyRequest().authenticated());
+
+        // this is what we call method chaining
+        http
+                .csrf(customizer -> customizer.disable())
+        .authorizeHttpRequests(request -> request.anyRequest().authenticated())
 //        http.formLogin(Customizer.withDefaults());
-        http.httpBasic(Customizer.withDefaults());
-        http.sessionManagement(sessions->sessions.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        .httpBasic(Customizer.withDefaults())
+        .sessionManagement(sessions->sessions.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 
 
