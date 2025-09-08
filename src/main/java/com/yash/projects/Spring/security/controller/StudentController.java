@@ -2,8 +2,12 @@ package com.yash.projects.Spring.security.controller;
 
 
 import com.yash.projects.Spring.security.entity.Student;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.Data;
+import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -22,5 +26,20 @@ public class StudentController {
     @GetMapping("/students")
     public List<Student> getStudent(){
 
+        return students;
+    }
+
+    @PostMapping("/students")
+    public  Student addStudent (@RequestBody Student student ){
+          students.add(student);
+          return  student;
+    }
+
+
+
+    @GetMapping("/csrf-token")
+    public CsrfToken getToken(HttpServletRequest request){
+
+        return (CsrfToken) request.getAttribute("_csrf");
     }
 }
